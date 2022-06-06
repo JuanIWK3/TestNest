@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AlunoModule } from './aluno/aluno.module';
 import { CursoModule } from './curso/curso.module';
-import { AuthModule } from './auth/auth.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
-  imports: [AlunoModule, CursoModule, AuthModule],
+  imports: [CursoModule, AlunoModule, PrismaModule],
 })
 export class AppModule {}

@@ -9,3 +9,37 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Aluno {
+  codigo    String       @id @default(uuid())
+  nome      String
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  cursos    CursoAluno[]
+
+  @@map("alunos")
+}
+
+model Curso {
+  codigo    String       @id @default(uuid())
+  descricao String
+  emenda    String
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  alunos    CursoAluno[]
+
+  @@map("cursos")
+}
+
+model CursoAluno {
+  codigo    String   @id @default(uuid())
+  aluno     Aluno    @relation(fields: [alunoCodigo], references: [codigo])
+  curso     Curso    @relation(fields: [cursoCodigo], references: [codigo])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  alunoCodigo String
+  cursoCodigo String
+
+  @@map("curso_alunos")
+}
