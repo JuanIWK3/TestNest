@@ -1,40 +1,40 @@
 import { PrismaService } from './../prisma/prisma.service';
 import { ForbiddenException, Injectable } from '@nestjs/common';
-import { AlunoDto } from './dto';
+import { CursoDto } from './dto';
 
 @Injectable()
-export class AlunoService {
+export class CursoService {
   constructor(private prisma: PrismaService) {}
-  async add(dto: AlunoDto) {
+  async add(dto: CursoDto) {
     try {
-      const user = await this.prisma.aluno.create({
+      const curso = await this.prisma.curso.create({
         data: dto,
       });
-      return user;
+      return curso;
     } catch (error) {
-      throw new ForbiddenException('Não foi possível criar o aluno');
+      throw new ForbiddenException('Não foi possível adicionar o curso');
     }
   }
 
   async get(id: string) {
     try {
-      const user = await this.prisma.aluno.findUnique({
+      const user = await this.prisma.curso.findUnique({
         where: {
           codigo: id,
         },
       });
       return user;
     } catch (error) {
-      throw new ForbiddenException('Não foi possível buscar o aluno');
+      throw new ForbiddenException('Não foi possível buscar o curso');
     }
   }
 
   getAll() {
-    return this.prisma.aluno.findMany();
+    return this.prisma.curso.findMany();
   }
 
   async delete(id: string) {
-    const user = await this.prisma.aluno.delete({
+    const user = await this.prisma.curso.delete({
       where: {
         codigo: id,
       },
@@ -43,17 +43,17 @@ export class AlunoService {
     return user;
   }
 
-  async update(id: string, dto: AlunoDto) {
+  async update(id: string, dto: CursoDto) {
     try {
-      const user = await this.prisma.aluno.update({
+      const curso = await this.prisma.curso.update({
         where: {
           codigo: id,
         },
         data: dto,
       });
-      return user;
+      return curso;
     } catch (error) {
-      throw new ForbiddenException('Não foi possível atualizar o aluno');
+      throw new ForbiddenException('Não foi possível atualizar o curso');
     }
   }
 }
