@@ -5,7 +5,7 @@
 ## Installation
 
 ```bash
-$ npm install
+$ yarn
 ```
 
 ## Running the app
@@ -14,16 +14,16 @@ You need Docker installed and running.
 
 ```bash
 # Run postgres server
-$ docker-compose up
+$ yarn db:dev:up
+
+# Generate the database
+$ prisma:dev:deploy
 
 ```
 
 ```bash
 # development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
+$ yarn start:dev
 
 # production mode
 $ npm run start:prod
