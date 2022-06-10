@@ -56,4 +56,55 @@ export class CursoService {
       throw new ForbiddenException('Não foi possível atualizar o curso');
     }
   }
+
+  async addAluno(codCurso: string, codAluno: string) {
+    try {
+      const alunoAlreadyExists = await this.prisma.cursoAluno.findMany({
+        where: {
+          cursoCodigo: codCurso,
+          alunoCodigo: codAluno,
+        },
+      });
+
+      if (alunoAlreadyExists.length > 0) {
+        throw new ForbiddenException('Aluno já cadastrado');
+      }
+
+      const curso = await this.prisma.cursoAluno.create({
+        data: {
+          cursoCodigo: codCurso,
+          alunoCodigo: codAluno,
+        },
+      });
+      console.log({ id: codCurso, codAluno });
+
+      return curso;
+    } catch (error) {
+      throw new ForbiddenException('Não foi possível adicionar o aluno');
+    }
+  }
+
+  async getAlunosByCurso(codCurso: string) {
+    return this.prisma.cursoAluno.findMany({
+      where: {
+        cursoCodigo: codCurso,
+      },
+      include: {
+        aluno: true,
+      },
+    });
+  }
+
+  async removeAluno(codigo: string) {
+    try {
+      const curso = await this.prisma.cursoAluno.delete({
+        where: {
+          codigo,
+        },
+      });
+      return curso;
+    } catch (error) {
+      throw new ForbiddenException('Não foi possível remover o aluno');
+    }
+  }
 }

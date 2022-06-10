@@ -44,4 +44,21 @@ export class CursoController {
   deleteCurso(@Param('id') id: string) {
     return this.cursoService.delete(id);
   }
+
+  @Put('add-teste/:id')
+  addAluno(@Param('id') id: string, @Body() Aluno: { codAluno: string }) {
+    console.log('chegou no back');
+
+    return this.cursoService.addAluno(id, Aluno.codAluno);
+  }
+
+  @Get('alunos/:id')
+  getAlunosByCurso(@Param('id') id: string) {
+    return this.cursoService.getAlunosByCurso(id);
+  }
+
+  @Delete('remove-aluno')
+  removeAluno(@Body() curso_aluno: { codigo: string }) {
+    return this.cursoService.removeAluno(curso_aluno.codigo);
+  }
 }

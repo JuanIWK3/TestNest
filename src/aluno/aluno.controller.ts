@@ -26,13 +26,6 @@ export class AlunoController {
     return this.alunoService.getAll();
   }
 
-  @Get('/:id')
-  getAluno(@Param('id') id: string) {
-    console.log({ id });
-
-    return this.alunoService.get(id);
-  }
-
   @Put('update/:id')
   updateAluno(@Param('id') id: string, @Body() dto: AlunoDto) {
     console.log({ id, dto });
@@ -43,5 +36,19 @@ export class AlunoController {
   @Delete('delete/:id')
   deleteAluno(@Param('id') id: string) {
     return this.alunoService.delete(id);
+  }
+
+  @Get('all-sem-curso')
+  getAlunosSemCurso() {
+    console.log('sem curso');
+
+    return this.alunoService.getAllSemCurso();
+  }
+
+  @Get(':id')
+  getAluno(@Param('id') id: string) {
+    console.log('fodase');
+
+    return this.alunoService.get(id);
   }
 }

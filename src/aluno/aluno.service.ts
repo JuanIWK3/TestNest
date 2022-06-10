@@ -56,4 +56,17 @@ export class AlunoService {
       throw new ForbiddenException('Não foi possível atualizar o aluno');
     }
   }
+
+  async getAllSemCurso() {
+    try {
+      const users = await this.prisma.aluno.findMany({
+        where: {
+          cursos: { none: {} },
+        },
+      });
+      return users;
+    } catch (error) {
+      throw new ForbiddenException('Não foi possível buscar o aluno');
+    }
+  }
 }

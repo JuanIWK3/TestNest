@@ -5,6 +5,6 @@ import { CursoModule } from './curso/curso.module';
 import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
-  imports: [ConfigModule, CursoModule, AlunoModule, PrismaModule],
+  imports: [ConfigModule.forRoot({}), CursoModule, AlunoModule, PrismaModule],
 })
 export class AppModule {}

@@ -32,14 +32,13 @@ model Curso {
 }
 
 model CursoAluno {
-  codigo    String   @id @default(uuid())
-  aluno     Aluno    @relation(fields: [alunoCodigo], references: [codigo])
-  curso     Curso    @relation(fields: [cursoCodigo], references: [codigo])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  codigo      String   @id @default(uuid())
+  aluno       Aluno    @relation(fields: [alunoCodigo], references: [codigo])
   alunoCodigo String
+  curso       Curso    @relation(fields: [cursoCodigo], references: [codigo])
   cursoCodigo String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@map("curso_alunos")
 }
