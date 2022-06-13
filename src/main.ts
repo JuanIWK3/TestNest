@@ -4,6 +4,7 @@ import 'dotenv/config';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
+  console.log(process.env.DATABASE_URL)
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(
     new ValidationPipe({

@@ -8,3 +8,22 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: nest
+    networks:
+      - local-network
+  api: 
+    build:
+        context: .
+        dockerfile: Dockerfile
+    ports:
+      - 3333:3333
+    depends_on:
+      - dev-db
+    networks:
+      - local-network
+    env_file:
+      - .env
+    links:
+      - dev-db
+networks:
+  local-network:
+    driver: bridge
